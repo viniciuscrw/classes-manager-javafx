@@ -29,4 +29,9 @@ public class CourseClassService {
         courseClass.setProfessor(professor);
         classDAO.save(courseClass);
     }
+
+    public void updateClassStatus(CourseClass courseClass, boolean active) {
+        courseClass.setActive(active);
+        classDAO.update(courseClass);
+    }
 }

@@ -20,4 +20,18 @@ public class CourseClassDAO {
             e.printStackTrace();
         }
     }
+
+    public void update(CourseClass courseClass) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(courseClass);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 }

@@ -3,6 +3,7 @@ package ifsp.poo.controller;
 import ifsp.poo.App;
 import ifsp.poo.model.*;
 import ifsp.poo.service.ActivityService;
+import ifsp.poo.service.CourseClassService;
 import ifsp.poo.service.StudentService;
 import ifsp.poo.util.AlertUtils;
 import javafx.collections.FXCollections;
@@ -49,12 +50,14 @@ public class ClassManagerController {
 
     private StudentService studentService;
     private ActivityService activityService;
+    private CourseClassService courseClassService;
 
     public void initalizeElements(CourseClass courseClass) {
         this.courseClass = courseClass;
         this.professor = (Professor) App.getSessionUser();
         studentService = new StudentService();
         activityService = new ActivityService();
+        courseClassService = new CourseClassService();
         initializeStudentsTable();
         initializeActivitiesTable();
         setClassLabel();
@@ -84,11 +87,9 @@ public class ClassManagerController {
 
         if (studentToBeRemoved != null) {
             try {
-                courseClass.getStudents().remove(studentToBeRemoved);
-                updateClasses(this.professor, this.courseClass);
-                save(this.professor);
-                App.showClassManagerWithStudentSelected(this.courseClass);
+                studentService.removeStudent(courseClass, studentToBeRemoved);
                 dialogStage.close();
+                App.showClassManagerWithStudentSelected(this.courseClass);
             } catch (Exception e) {
                 e.printStackTrace();
                 AlertUtils.showErrorAlert("Erro ao remover aluno(s).");
@@ -99,17 +100,14 @@ public class ClassManagerController {
     }
 
     @FXML
-    private void closeClass() throws Exception {
+    private void closeClass() {
         boolean existsActivityToBeCorrected = courseClass.getActivities()
                 .stream()
                 .anyMatch(actv -> actv.getStatus().equals(ActivityStatus.WAITING_CORRECTION.getValue()));
 
         if (!existsActivityToBeCorrected) {
-            this.courseClass.setActive(false);
+            courseClassService.updateClassStatus(courseClass, false);
             setStatusLabel();
-            //TODO persist
-            updateClasses(this.professor, this.courseClass);
-            save(this.professor);
         } else {
             AlertUtils.showWarningAlert("Ainda existem atividades a serem corrigidas.");
         }
@@ -166,16 +164,8 @@ public class ClassManagerController {
     }
 
     private void updateTestStatus(Activity correctedActivity) {
-//        int index = this.courseClass.getActivities().in(correctedActivity);
-//        correctedActivity.setStatus(ActivityStatus.CORRECTED.getValue());
-//        courseClass.getActivities().set(index, correctedActivity);
-//
         try {
-//            updateClasses(professor, this.courseClass);
-//            //TODO persist
-//            save(professor);
-//            App.showClassManagerWithActivitySelected(this.courseClass);
-//            this.dialogStage.close();
+            //TODO
         } catch (Exception e) {
             e.printStackTrace();
             AlertUtils.showErrorAlert("Erro ao atualizar status da atividade.");
@@ -198,12 +188,6 @@ public class ClassManagerController {
         } else {
             AlertUtils.showWarningAlert("Nenhuma atividade selecionada.");
         }
-    }
-
-    private void removeFromStudentsGrade(Activity activity) {
-        courseClass.getStudents().forEach(student ->
-                student.getGrades().removeIf(grade -> grade.getActivity().equals(activity))
-        );
     }
 
     private void initializeActivitiesTable() {
@@ -233,60 +217,6 @@ public class ClassManagerController {
         String status = courseClass.isActive() ? "Em Andamento" : "Finalizada";
         studentStatusLabel.setText(status);
         activityStatusLabel.setText(status);
-    }
-
-    public void computeGradeToStudent(Activity activity, String studentId, BigDecimal score) {
-        Student student = getStudentById(studentId);
-        ArrayList<Grade> grades = new ArrayList<>();
-        Grade grade = new Grade(activity, score.doubleValue());
-
-        if (CollectionUtils.isEmpty(student.getGrades())) {
-            grades.add(grade);
-            student.setGrades(grades);
-        } else {
-            boolean found = false;
-            for (Grade grd : student.getGrades()) {
-                if (grd.getActivity().equals(activity)) {
-                    int index = student.getGrades().indexOf(grd);
-                    student.getGrades().set(index, grade);
-                    found = true;
-                }
-            }
-
-            if (!found) {
-                student.getGrades().add(grade);
-            }
-        }
-
-        try {
-            persistToProfessorData(student);
-        } catch (Exception e) {
-            e.printStackTrace();
-            AlertUtils.showErrorAlert("Ocorreu um erro ao computar a nota da atividade para o aluno " + student.getName());
-        }
-    }
-
-    private Student getStudentById(String studentId) {
-        return this.courseClass.getStudents().stream()
-                .filter(student -> student.getRegistration().equals(studentId))
-                .findAny()
-                .orElse(new Student());
-    }
-
-    private void persistToProfessorData(Student student) throws Exception {
-        int index = this.courseClass.getStudents().indexOf(student);
-        this.courseClass.getStudents().set(index, student);
-        updateClasses(professor, courseClass);
-        save(professor);
-    }
-
-    private void updateClasses(Professor professor, CourseClass updatedClass) {
-        int index = professor.getClasses().indexOf(courseClass);
-        professor.getClasses().set(index, updatedClass);
-    }
-
-    private void save(Professor professor) throws Exception {
-
     }
 
     private void configureStudentTableForDoubleClickEvent() {

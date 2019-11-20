@@ -67,4 +67,9 @@ public class StudentService {
                 }
         );
     }
+
+    public void removeStudent(CourseClass courseClass, Student student) {
+        studentDAO.delete(student);
+        courseClass.getStudents().remove(student);
+    }
 }
