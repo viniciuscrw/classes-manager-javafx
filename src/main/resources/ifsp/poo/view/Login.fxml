@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="301.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.LoginController">
+   <children>
+       <Label layoutX="110.0" layoutY="25.0" text="Gerenciador de Turmas" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="120.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+       <Label layoutX="69.0" layoutY="90.0" text="Usuário:" />
+       <TextField fx:id="user" layoutX="136.0" layoutY="86.0" />
+       <Label layoutX="69.0" layoutY="131.0" text="Senha:" />
+       <PasswordField fx:id="password" layoutX="136.0" layoutY="127.0" />
+       <Label layoutX="89.0" layoutY="247.0" text="Não possui uma conta? " />
+       <HBox layoutX="139.0" layoutY="191.0">
+           <children>
+               <Button defaultButton="true" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="61.0" text="Entrar">
+                   <HBox.margin>
+                       <Insets right="20.0" />
+                   </HBox.margin></Button>
+               <Button mnemonicParsing="false" onAction="#cancel" text="Cancelar" />
+           </children>
+       </HBox>
+       <Hyperlink layoutX="240.0" layoutY="243.0" onAction="#openSignupForm" text="Cadastre-se" />
+   </children>
+</AnchorPane>

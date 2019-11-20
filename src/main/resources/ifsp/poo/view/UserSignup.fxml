@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="402.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.UserSignupController">
+   <children>
+      <Label layoutX="39.0" layoutY="26.0" text="Cadastro">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+       <Label layoutX="40.0" layoutY="91.0" text="Nome Completo:" />
+       <TextField fx:id="fullNameField" layoutX="181.0" layoutY="87.0" />
+       <Label layoutX="40.0" layoutY="126.0" text="Nome de usuário:" />
+       <TextField fx:id="usernameField" layoutX="181.0" layoutY="122.0" />
+       <Label layoutX="40.0" layoutY="163.0" text="E-mail:" />
+       <TextField fx:id="emailField" layoutX="181.0" layoutY="159.0" />
+       <Label layoutX="40.0" layoutY="200.0" text="Senha:" />
+       <PasswordField fx:id="passwordField" layoutX="181.0" layoutY="196.0" />
+       <Label layoutX="40.0" layoutY="237.0" text="Confirme sua senha:" />
+       <PasswordField fx:id="passwordRepeatField" layoutX="181.0" layoutY="233.0" />
+       <HBox layoutX="156.0" layoutY="314.0">
+         <children>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#confirm" prefHeight="32.0" prefWidth="90.0" text="Confirmar">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="93.0" text="Cancelar">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

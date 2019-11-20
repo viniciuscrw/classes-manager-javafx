@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="296.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.MainLayoutController">
+    <Label fx:id="greetingLabel" layoutX="47.0" layoutY="30.0" text="Olá, !">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+    <Label fx:id="currentPeriodLabel" layoutX="230.0" layoutY="55.0" text="Período Atual: xxxx">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Label>
+    <Group layoutX="40.0" layoutY="85.0">
+        <Separator layoutX="4.0" prefHeight="17.0" prefWidth="367.0" />
+        <Separator layoutY="6.0" orientation="VERTICAL" prefHeight="153.0" prefWidth="12.0" />
+        <Separator layoutX="365.0" layoutY="6.0" orientation="VERTICAL" prefHeight="155.0" prefWidth="12.0" />
+        <Separator layoutX="3.0" layoutY="153.0" prefHeight="17.0" prefWidth="367.0" />
+       <Label layoutX="42.0" layoutY="29.0" text="Turmas:" />
+    </Group>
+    <ComboBox fx:id="classesCombo" layoutX="145.0" layoutY="110.0" prefHeight="25.0" prefWidth="228.0" promptText="Selecione a turma..." />
+    <Button layoutX="73.0" layoutY="201.0" mnemonicParsing="false" onAction="#registerNewClass" prefHeight="26.0" prefWidth="118.0" text="Nova Turma..." />
+    <Button defaultButton="true" layoutX="275.0" layoutY="201.0" mnemonicParsing="false" onAction="#manageClass" prefHeight="26.0" prefWidth="109.0" text="Gerenciar" />
+</AnchorPane>

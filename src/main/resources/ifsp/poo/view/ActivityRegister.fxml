@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="357.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.ActivityRegisterController">
+    <Label layoutX="30.0" layoutY="68.0" text="Atividade:" />
+    <TextField fx:id="descriptionField" layoutX="105.0" layoutY="64.0" />
+    <Button defaultButton="true" layoutX="66.0" layoutY="292.0" mnemonicParsing="false" onAction="#confirm" prefHeight="32.0" prefWidth="83.0" text="Confirmar" />
+    <Button cancelButton="true" layoutX="200.0" layoutY="292.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="76.0" text="Cancelar" />
+   <Label layoutX="30.0" layoutY="116.0" text="Data:" />
+   <DatePicker fx:id="activityDate" layoutX="105.0" layoutY="111.0" prefHeight="26.0" prefWidth="171.0" />
+   <CheckBox layoutX="136.0" layoutY="186.0" mnemonicParsing="false" text="Prova" fx:id="testCheckBox" />
+
+</AnchorPane>

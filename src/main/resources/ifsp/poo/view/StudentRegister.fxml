@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="232.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.StudentRegisterController">
+    <Label layoutX="39.0" layoutY="47.0" text="Nome:" />
+    <TextField fx:id="nameField" layoutX="97.0" layoutY="43.0" />
+    <Label layoutX="39.0" layoutY="90.0" text="RA:" />
+    <TextField fx:id="registrationField" layoutX="97.0" layoutY="86.0" />
+    <Button defaultButton="true" layoutX="67.0" layoutY="168.0" mnemonicParsing="false" onAction="#confirm" prefHeight="32.0" prefWidth="83.0" text="Confirmar" />
+    <Button cancelButton="true" layoutX="213.0" layoutY="168.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="83.0" text="Cancelar" />
+</AnchorPane>
