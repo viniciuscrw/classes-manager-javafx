@@ -21,7 +21,8 @@ public class HibernateSessionFactory {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/classmanagerdb?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false");
+                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/classmanagerdb?createDatabaseIfNotExist=true" +
+                        "&useUnicode=yes&characterEncoding=UTF-8&useSSL=false&useTimezone=true&serverTimezone=UTC");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "password");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");

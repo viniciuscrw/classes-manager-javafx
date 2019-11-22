@@ -5,11 +5,14 @@ import ifsp.poo.model.CourseClass;
 import ifsp.poo.model.Professor;
 import ifsp.poo.util.AlertUtils;
 import ifsp.poo.util.DateUtils;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -68,5 +71,9 @@ public class MainLayoutController {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+        dialogStage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 }
