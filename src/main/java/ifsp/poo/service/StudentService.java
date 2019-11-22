@@ -6,6 +6,7 @@ import ifsp.poo.model.Grade;
 import ifsp.poo.model.Student;
 import ifsp.poo.persistence.GradeDAO;
 import ifsp.poo.persistence.StudentDAO;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +38,16 @@ public class StudentService {
     }
 
     private void createGradesToNewStudent(CourseClass courseClass, Student student) {
-        courseClass.getActivities().forEach(
-                activity -> {
-                    Grade grade = new Grade(activity, 0d);
-                    grade.setStudent(student);
-                    gradeDAO.save(grade);
-                    student.getGrades().add(grade);
-                }
-        );
+        if (CollectionUtils.isNotEmpty(courseClass.getActivities())) {
+            courseClass.getActivities().forEach(
+                    activity -> {
+                        Grade grade = new Grade(activity, 0d);
+                        grade.setStudent(student);
+                        gradeDAO.save(grade);
+                        student.getGrades().add(grade);
+                    }
+            );
+        }
     }
 
     public void updateExistingStudent(Student student, String name, String registration) {
@@ -55,31 +58,35 @@ public class StudentService {
     }
 
     public void createNewGradeToStudents(CourseClass courseClass, Activity activity) {
-        courseClass.getStudents().forEach(
-                student -> {
-                    Grade grade = new Grade(activity, 0d);
-                    grade.setStudent(student);
-                    gradeDAO.save(grade);
-                    student.getGrades().add(grade);
-                    calculateGradesAverage(student);
-                }
-        );
+        if (CollectionUtils.isNotEmpty(courseClass.getStudents())) {
+            courseClass.getStudents().forEach(
+                    student -> {
+                        Grade grade = new Grade(activity, 0d);
+                        grade.setStudent(student);
+                        gradeDAO.save(grade);
+                        student.getGrades().add(grade);
+                        calculateGradesAverage(student);
+                    }
+            );
+        }
     }
 
     public void removeGradeToStudents(CourseClass courseClass, Activity activity) {
-        courseClass.getStudents().forEach(
-                student -> {
-                    Grade gradeToRemove = null;
-                    for (Grade grade : student.getGrades()) {
-                        if (grade.getActivity().equals(activity)) {
-                            gradeToRemove = grade;
-                            gradeDAO.delete(grade);
+        if (CollectionUtils.isNotEmpty(courseClass.getStudents())) {
+            courseClass.getStudents().forEach(
+                    student -> {
+                        Grade gradeToRemove = null;
+                        for (Grade grade : student.getGrades()) {
+                            if (grade.getActivity().equals(activity)) {
+                                gradeToRemove = grade;
+                                gradeDAO.delete(grade);
+                            }
                         }
+                        student.getGrades().remove(gradeToRemove);
+                        calculateGradesAverage(student);
                     }
-                    student.getGrades().remove(gradeToRemove);
-                    calculateGradesAverage(student);
-                }
-        );
+            );
+        }
     }
 
     public void removeStudent(CourseClass courseClass, Student student) {
@@ -94,11 +101,17 @@ public class StudentService {
     }
 
     public void updateStudentsGrades(CourseClass courseClass) {
-        courseClass.getStudents()
-                .forEach(this::calculateGradesAverage);
+        if (CollectionUtils.isNotEmpty(courseClass.getStudents())) {
+            courseClass.getStudents()
+                    .forEach(this::calculateGradesAverage);
+        }
     }
 
     private void calculateGradesAverage(Student student) {
+        if (student == null) {
+            return;
+        }
+
         WeightedGradeCalculator gradeCalculator = new WeightedGradeCalculator();
         List<Double> weightedGrades = new ArrayList<>();
         List<Integer> weights = new ArrayList<>();

@@ -4,6 +4,7 @@ import ifsp.poo.App;
 import ifsp.poo.model.Activity;
 import ifsp.poo.model.Grade;
 import ifsp.poo.service.ActivityService;
+import ifsp.poo.util.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -41,7 +43,12 @@ public class ActivityCorrectorController {
 
     @FXML
     public void confirm() {
-        activityService.updateActivityStatus(activity);
+        if (CollectionUtils.isNotEmpty(activity.getCourseClass().getStudents())) {
+            activityService.updateActivityStatus(activity);
+        } else {
+            AlertUtils.showWarningAlert("Nenhum aluno cadastrado.");
+        }
+
         dialogStage.close();
         App.showClassManagerWithActivitySelected(activity.getCourseClass());
     }
