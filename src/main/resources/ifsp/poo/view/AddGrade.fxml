@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="218.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.AddGradeController">
+    <Label layoutX="42.0" layoutY="48.0" text="Aluno:" />
+    <Label fx:id="studentCodeLabel" layoutX="91.0" layoutY="48.0" prefHeight="16.0" prefWidth="143.0" text="Nome do Aluno" />
+    <Label layoutX="42.0" layoutY="90.0" text="Nota:" />
+    <ComboBox fx:id="studentGradeCombo" layoutX="91.0" layoutY="85.0" prefHeight="26.0" prefWidth="100.0" />
+    <Button defaultButton="true" layoutX="38.0" layoutY="155.0" mnemonicParsing="false" onAction="#confirm" prefHeight="32.0" prefWidth="76.0" text="OK" />
+    <Button cancelButton="true" layoutX="169.0" layoutY="155.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="76.0" text="Cancelar" />
+</AnchorPane>

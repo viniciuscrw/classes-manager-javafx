@@ -80,6 +80,10 @@ public class Activity {
         return id;
     }
 
+    public String getCode() {
+        return this.description + " [" + this.courseClass.getCode() + "]";
+    }
+
     public StringProperty getDescriptionProperty() {
         return new SimpleStringProperty(this.description);
     }

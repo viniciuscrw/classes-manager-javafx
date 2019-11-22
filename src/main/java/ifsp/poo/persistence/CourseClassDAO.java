@@ -1,7 +1,7 @@
 package ifsp.poo.persistence;
 
 import ifsp.poo.model.CourseClass;
-import ifsp.poo.util.HibernateUtils;
+import ifsp.poo.util.HibernateSessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -9,7 +9,7 @@ public class CourseClassDAO {
 
     public void save(CourseClass courseClass) {
         Transaction transaction = null;
-        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+        try (Session session = HibernateSessionFactory.getInstance().openSession()) {
             transaction = session.beginTransaction();
             session.save(courseClass);
             transaction.commit();
@@ -23,7 +23,7 @@ public class CourseClassDAO {
 
     public void update(CourseClass courseClass) {
         Transaction transaction = null;
-        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+        try (Session session = HibernateSessionFactory.getInstance().openSession()) {
             transaction = session.beginTransaction();
             session.update(courseClass);
             transaction.commit();

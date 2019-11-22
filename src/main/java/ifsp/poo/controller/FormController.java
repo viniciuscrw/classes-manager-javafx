@@ -1,6 +1,5 @@
 package ifsp.poo.controller;
 
-import ifsp.poo.App;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 

@@ -9,12 +9,14 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
 
-public class HibernateUtils {
+public class HibernateSessionFactory {
 
-    private static SessionFactory sessionFactory;
+    private static SessionFactory instance;
 
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
+    private HibernateSessionFactory() {}
+
+    public static SessionFactory getInstance() {
+        if (instance == null) {
             try {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
@@ -37,11 +39,11 @@ public class HibernateUtils {
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+                instance = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return sessionFactory;
+        return instance;
     }
 }

@@ -77,7 +77,7 @@ public class UserSignupController extends FormController {
         return passwordField.getText().equals(passwordRepeatField.getText());
     }
 
-    private Professor createUser() throws Exception {
+    private Professor createUser() {
         Professor professor = new Professor();
         professor.setName(fullNameField.getText());
         professor.setUsername(usernameField.getText());
@@ -85,12 +85,11 @@ public class UserSignupController extends FormController {
         professor.setEmail(emailField.getText());
         professor.setClasses(new ArrayList<>());
 
-        //TODO persist
         persistProfessor(professor);
         return professor;
     }
 
-    private void persistProfessor(Professor professor) throws Exception {
+    private void persistProfessor(Professor professor) {
         ProfessorDAO professorDAO = new ProfessorDAO();
         professorDAO.save(professor);
     }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="457.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.ActivityCorrectorController">
+
+    <Label fx:id="activityLabel" layoutX="21.0" layoutY="22.0" maxWidth="354.0" text="Label">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Label>
+    <TableView fx:id="gradesTable" layoutX="21.0" layoutY="65.0" prefHeight="272.0" prefWidth="354.0">
+        <columns>
+            <TableColumn fx:id="studentColumn" prefWidth="268.0" text="Aluno" />
+            <TableColumn fx:id="gradeColumn" prefWidth="85.0" text="Nota" />
+        </columns>
+    </TableView>
+    <Button defaultButton="true" layoutX="56.0" layoutY="396.0" mnemonicParsing="false" onAction="#confirm" prefHeight="32.0" prefWidth="85.0" text="Confirmar" />
+    <Button cancelButton="true" layoutX="258.0" layoutY="394.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="85.0" text="Cancelar" />
+   <Label layoutX="85.0" layoutY="339.0" text="Clique duas vezes para alterar a nota">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Label>
+
+</AnchorPane>

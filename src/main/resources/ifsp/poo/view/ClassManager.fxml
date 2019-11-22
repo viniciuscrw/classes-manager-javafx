@@ -7,7 +7,7 @@
 <TabPane prefHeight="400.0" prefWidth="621.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifsp.poo.controller.ClassManagerController">
     <Tab text="Alunos">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="631.0">
-            <TableView fx:id="studentTable" prefHeight="367.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="studentTable" prefHeight="332.0" prefWidth="400.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="0.0">
                 <columns>
                     <TableColumn fx:id="studentColumn" prefWidth="333.0" text="Aluno">
 
@@ -24,6 +24,11 @@
             <Button layoutX="435.0" layoutY="125.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="25.0" prefWidth="158.0" text="Editar..." />
             <Button layoutX="435.0" layoutY="170.0" mnemonicParsing="false" onAction="#removeStudent" prefHeight="25.0" prefWidth="158.0" text="Remover" />
             <Button layoutX="435.0" layoutY="310.0" mnemonicParsing="false" onAction="#closeClass" prefHeight="25.0" prefWidth="158.0" text="Encerrar Disciplina" />
+            <Label layoutX="37.0" layoutY="334.0" text="Clique duas vezes para exibir o desempenho do aluno">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
         </AnchorPane>
     </Tab>
     <Tab text="Atividades">

@@ -11,6 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+import java.util.Optional;
+
 public class StudentGradesController extends FormController {
 
     @FXML
@@ -61,6 +63,8 @@ public class StudentGradesController extends FormController {
     }
 
     private void setAverageLabel() {
-        averageLabel.setText(String.format("%.2f", student.getGradesAverage()));
+        averageLabel.setText(String.format("%.2f",
+                Optional.ofNullable(student.getGradesAverage())
+                        .orElse(0d)));
     }
 }

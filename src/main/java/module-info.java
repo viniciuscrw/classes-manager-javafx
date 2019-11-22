@@ -16,5 +16,6 @@ module ifsp.poo {
     opens ifsp.poo.controller to javafx.fxml;
     opens ifsp.poo.model to org.hibernate.orm.core;
     exports ifsp.poo.controller;
+    exports ifsp.poo.model;
     exports ifsp.poo;
 }

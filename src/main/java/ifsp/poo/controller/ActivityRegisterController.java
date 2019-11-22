@@ -24,7 +24,6 @@ public class ActivityRegisterController extends FormController {
     private Stage classStage;
     private CourseClass courseClass;
     private Activity activity;
-    private ClassManagerController classController;
 
     public void initializeElements(Activity activity) {
         this.activity = activity;
@@ -73,10 +72,6 @@ public class ActivityRegisterController extends FormController {
     private boolean validFields() {
         return StringUtils.isNotEmpty(descriptionField.getText())
                 && activityDate.getValue() != null;
-    }
-
-    public void setClassController(ClassManagerController classController) {
-        this.classController = classController;
     }
 
     public void setCourseClass(CourseClass courseClass) {

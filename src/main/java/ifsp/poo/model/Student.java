@@ -19,6 +19,8 @@ public class Student {
     private String name;
     @Column(unique = true)
     private String registration;
+    @Column
+    private Double gradesAverage;
     @ManyToOne(fetch = FetchType.LAZY)
     private CourseClass courseClass;
 
@@ -75,10 +77,11 @@ public class Student {
     }
 
     public Double getGradesAverage() {
-        return this.getGrades().stream()
-                .mapToDouble(Grade::getValue)
-                .average()
-                .orElse(0d);
+        return gradesAverage;
+    }
+
+    public void setGradesAverage(Double gradesAverage) {
+        this.gradesAverage = gradesAverage;
     }
 
     public StringProperty getCodeProperty() {

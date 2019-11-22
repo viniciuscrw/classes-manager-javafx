@@ -14,10 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import org.apache.commons.collections4.CollectionUtils;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -46,7 +43,6 @@ public class ClassManagerController {
 
     private Stage dialogStage;
     private CourseClass courseClass;
-    private Professor professor;
 
     private StudentService studentService;
     private ActivityService activityService;
@@ -54,7 +50,6 @@ public class ClassManagerController {
 
     public void initalizeElements(CourseClass courseClass) {
         this.courseClass = courseClass;
-        this.professor = (Professor) App.getSessionUser();
         studentService = new StudentService();
         activityService = new ActivityService();
         courseClassService = new CourseClassService();
@@ -127,7 +122,7 @@ public class ClassManagerController {
 
     @FXML
     private void createActivity() {
-        App.showActivityRegisterForm(dialogStage, courseClass, new Activity(), this);
+        App.showActivityRegisterForm(dialogStage, courseClass, new Activity());
     }
 
     @FXML
@@ -135,7 +130,7 @@ public class ClassManagerController {
         Activity activityToBeEditted = activityTable.getSelectionModel().getSelectedItem();
 
         if (activityToBeEditted != null) {
-            App.showActivityRegisterForm(dialogStage, courseClass, activityToBeEditted, this);
+            App.showActivityRegisterForm(dialogStage, courseClass, activityToBeEditted);
         } else {
             AlertUtils.showWarningAlert("Você deve selecionar uma atividade para editar.");
         }
@@ -151,24 +146,10 @@ public class ClassManagerController {
         Activity activityToBeCorrected = activityTable.getSelectionModel().getSelectedItem();
 
         if (activityToBeCorrected != null) {
-            if (activityToBeCorrected.getStatus().equals(ActivityStatus.CORRECTED.getValue())) {
-                AlertUtils.showWarningAlert("Atividade já está corrigida.");
-                return;
-            }
-
-            //TODO
-            
+            dialogStage.close();
+            App.showActivityCorrector(activityToBeCorrected);
         } else {
             AlertUtils.showWarningAlert("Nenhuma atividade selecionada.");
-        }
-    }
-
-    private void updateTestStatus(Activity correctedActivity) {
-        try {
-            //TODO
-        } catch (Exception e) {
-            e.printStackTrace();
-            AlertUtils.showErrorAlert("Erro ao atualizar status da atividade.");
         }
     }
 
@@ -195,7 +176,7 @@ public class ClassManagerController {
             ObservableList<Activity> activities = FXCollections.observableArrayList(
                     courseClass.getActivities().stream()
                             .sorted(Comparator.comparing(Activity::getStatus)
-                                    .thenComparing(Activity::getDescription))
+                                    .thenComparing(Activity::getDate))
                             .collect(Collectors.toList()));
 
             activityTable.setItems(activities);

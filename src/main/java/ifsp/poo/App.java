@@ -150,8 +150,7 @@ public class App extends Application {
         }
     }
 
-    public static void showActivityRegisterForm(Stage classStage, CourseClass courseClass, Activity activity,
-                                                ClassManagerController classController) {
+    public static void showActivityRegisterForm(Stage classStage, CourseClass courseClass, Activity activity) {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("view/ActivityRegister.fxml"));
             AnchorPane register = loader.load();
@@ -164,7 +163,6 @@ public class App extends Application {
             controller.setDialogStage(registerStage);
             controller.setClassStage(classStage);
             controller.setCourseClass(courseClass);
-            controller.setClassController(classController);
             controller.initializeElements(activity);
         } catch (IOException e) {
             e.printStackTrace();
@@ -183,6 +181,40 @@ public class App extends Application {
             StudentGradesController controller = loader.getController();
             controller.setDialogStage(registerStage);
             controller.initializeElements(student);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showActivityCorrector(Activity activity) {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("view/ActivityCorrector.fxml"));
+            AnchorPane register = loader.load();
+            Stage correctorStage = new Stage();
+            correctorStage.setScene(new Scene(register));
+            correctorStage.setTitle("Correção de Atividade");
+            correctorStage.show();
+
+            ActivityCorrectorController controller = loader.getController();
+            controller.setDialogStage(correctorStage);
+            controller.initializeElements(activity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showAddGradeForm(Grade grade, Activity activity) {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("view/AddGrade.fxml"));
+            AnchorPane register = loader.load();
+            Stage gradeStage = new Stage();
+            gradeStage.setScene(new Scene(register));
+            gradeStage.setTitle("Adicionar Nota - " + activity.getCode());
+            gradeStage.show();
+
+            AddGradeController controller = loader.getController();
+            controller.initializeElements(grade, activity);
+            controller.setDialogStage(gradeStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
