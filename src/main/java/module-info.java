@@ -2,6 +2,7 @@ module ifsp.poo {
     requires javafx.controls;
     requires javafx.base;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires commons.lang3;
     requires commons.collections4;
     requires org.hibernate.orm.core;
